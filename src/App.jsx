@@ -11,6 +11,7 @@ export default function App() {
         project={selectedProject}
         onBack={() => setSelectedProject(null)}
       />
+      
     );
   }
 
