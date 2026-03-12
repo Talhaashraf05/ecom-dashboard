@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { Plus, FolderOpen, Trash2, Layers, FileText } from "lucide-react";
+import { Plus, FolderOpen, Trash2, FileText } from "lucide-react";
 import { getProjects, createProject, deleteProject, getFileCountsByProject } from "../lib/db";
 import { useTheme } from "../lib/theme";
 import ThemeToggle from "../components/ThemeToggle";
 
 export default function ProjectList({ onSelect }) {
-  const { C } = useTheme();
+  const { C, mode } = useTheme();
   const [projects, setProjects] = useState([]);
   const [fileCounts, setFileCounts] = useState({});
   const [showNew, setShowNew] = useState(false);
@@ -44,16 +44,9 @@ export default function ProjectList({ onSelect }) {
 
         {/* Header */}
         <div style={{ background: C.surface, borderBottom: "1px solid " + C.border, padding: "14px 26px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{ width: 34, height: 34, borderRadius: 9, background: "#22d3ee14", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Layers size={17} style={{ color: C.imp }} />
-            </div>
-            <div>
-              <div style={{ fontSize: 17, fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: -0.5 }}>
-                SQP <span style={{ color: C.imp }}>Intelligence</span>
-              </div>
-              <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>SEARCH QUERY PERFORMANCE · BRAND VIEW</div>
-            </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <img src={mode === "dark" ? "/ecommercesteem_logo.png" : "/ecommercesteem_logo_dark.png"} alt="EcommerceSteem" style={{ height: 40, width: "auto" }} />
+            <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>SQP DASHBOARD · BRAND VIEW</div>
           </div>
           <ThemeToggle />
         </div>
@@ -70,7 +63,7 @@ export default function ProjectList({ onSelect }) {
               onClick={() => setShowNew(true)}
               style={{
                 display: "flex", alignItems: "center", gap: 7,
-                background: C.imp, color: "#000", border: "none", borderRadius: 9,
+                background: C.imp, color: C.btnText, border: "none", borderRadius: 9,
                 padding: "9px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer",
                 fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
               }}
@@ -103,7 +96,7 @@ export default function ProjectList({ onSelect }) {
               <button
                 onClick={handleCreate}
                 style={{
-                  background: C.imp, color: "#000", border: "none", borderRadius: 8,
+                  background: C.imp, color: C.btnText, border: "none", borderRadius: 8,
                   padding: "8px 20px", fontSize: 12, fontWeight: 700, cursor: "pointer",
                   fontFamily: "'Syne', sans-serif",
                 }}

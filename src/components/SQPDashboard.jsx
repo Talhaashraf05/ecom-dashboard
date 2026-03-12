@@ -5,7 +5,7 @@ import {
 } from "recharts";
 import {
   Upload, X, ChevronUp, ChevronDown, Search, Eye,
-  MousePointer, ShoppingCart, BarChart2, Minus, ChevronRight, Layers, ArrowLeft
+  MousePointer, ShoppingCart, BarChart2, Minus, ChevronRight, ArrowLeft
 } from "lucide-react";
 import { useTheme } from "../lib/theme";
 import ThemeToggle from "./ThemeToggle";
@@ -362,7 +362,7 @@ function KeywordRow({ row, prevRow, allWeeks, kwHistory, isEven, isExpanded, onT
           cursor: "pointer",
           transition: "background 0.12s",
         }}
-        onMouseEnter={e => { if (!isExpanded) e.currentTarget.style.background = "#22d3ee07"; }}
+        onMouseEnter={e => { if (!isExpanded) e.currentTarget.style.background = C.hoverBg; }}
         onMouseLeave={e => { e.currentTarget.style.background = baseBg; }}
       >
         {/* Keyword name */}
@@ -422,10 +422,10 @@ function UploadZone({ onFiles, compact }) {
       onDragLeave={() => setDrag(false)}
       onDrop={e => { e.preventDefault(); setDrag(false); handle([...e.dataTransfer.files]); }}
       onClick={() => inputRef.current.click()}
-      style={{ border: "2px dashed " + (drag ? C.imp : C.border), borderRadius: 16, padding: "56px 32px", textAlign: "center", cursor: "pointer", transition: "all 0.18s", background: drag ? "#22d3ee07" : C.card }}
+      style={{ border: "2px dashed " + (drag ? C.imp : C.border), borderRadius: 16, padding: "56px 32px", textAlign: "center", cursor: "pointer", transition: "all 0.18s", background: drag ? C.hoverBg : C.card }}
     >
       <input ref={inputRef} type="file" accept=".csv" multiple style={{ display: "none" }} onChange={e => handle([...e.target.files])} />
-      <div style={{ width: 56, height: 56, borderRadius: 14, background: "#22d3ee12", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+      <div style={{ width: 56, height: 56, borderRadius: 14, background: C.imp + "14", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
         <Upload size={26} style={{ color: C.imp }} />
       </div>
       <div style={{ fontSize: 20, fontWeight: 800, color: C.text, fontFamily: "'Syne', sans-serif", marginBottom: 8 }}>Drop SQP reports here</div>
@@ -437,7 +437,9 @@ function UploadZone({ onFiles, compact }) {
 
 /* ─── Main Dashboard ─────────────────────────────────────────────── */
 export default function SQPDashboard({ csvTexts = [], onAddFiles, onBack, projectName }) {
-  C = useTheme().C;
+  const _theme = useTheme();
+  C = _theme.C;
+  const mode = _theme.mode;
   const [allWeeks, setAllWeeks]     = useState([]);
   const [selectedWeekIdx, setSelectedWeekIdx] = useState(-1);
   const [expandedKw, setExpandedKw] = useState(null);
@@ -539,14 +541,12 @@ export default function SQPDashboard({ csvTexts = [], onAddFiles, onBack, projec
                 <ArrowLeft size={15} style={{ color: C.textDim }} />
               </div>
             )}
-            <div style={{ width: 34, height: 34, borderRadius: 9, background: "#22d3ee14", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Layers size={17} style={{ color: C.imp }} />
-            </div>
-            <div>
-              <div style={{ fontSize: 17, fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: -0.5 }}>
-                {projectName || "SQP"} <span style={{ color: C.imp }}>Intelligence</span>
+            <img src={mode === "dark" ? "/ecommercesteem_logo.png" : "/ecommercesteem_logo_dark.png"} alt="EcommerceSteem" style={{ height: 40, width: "auto" }} />
+            <div style={{ borderLeft: "1px solid " + C.border, paddingLeft: 14 }}>
+              <div style={{ fontSize: 15, fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: -0.5 }}>
+                {projectName || "Dashboard"}
               </div>
-              <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>SEARCH QUERY PERFORMANCE · BRAND VIEW</div>
+              <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>SQP DASHBOARD · BRAND VIEW</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>

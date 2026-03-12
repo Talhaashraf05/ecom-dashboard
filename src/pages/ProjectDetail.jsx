@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ArrowLeft, Upload, Trash2, FileText, Eye, Layers } from "lucide-react";
+import { ArrowLeft, Upload, Trash2, FileText, Eye } from "lucide-react";
 import { getFiles, addFiles, deleteFile } from "../lib/db";
 import SQPDashboard from "../components/SQPDashboard";
 import { useTheme } from "../lib/theme";
 import ThemeToggle from "../components/ThemeToggle";
 
 export default function ProjectDetail({ project, onBack }) {
-  const { C } = useTheme();
+  const { C, mode } = useTheme();
   const [files, setFiles] = useState([]);
   const [view, setView] = useState("files"); // "files" | "dashboard"
   const [drag, setDrag] = useState(false);
@@ -67,11 +67,9 @@ export default function ProjectDetail({ project, onBack }) {
             >
               <ArrowLeft size={15} style={{ color: C.textDim }} />
             </div>
-            <div style={{ width: 34, height: 34, borderRadius: 9, background: "#22d3ee14", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Layers size={17} style={{ color: C.imp }} />
-            </div>
-            <div>
-              <div style={{ fontSize: 17, fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: -0.5 }}>
+            <img src={mode === "dark" ? "/ecommercesteem_logo.png" : "/ecommercesteem_logo_dark.png"} alt="EcommerceSteem" style={{ height: 40, width: "auto" }} />
+            <div style={{ borderLeft: "1px solid " + C.border, paddingLeft: 14 }}>
+              <div style={{ fontSize: 15, fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: -0.5 }}>
                 {project.name}
               </div>
               <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>PROJECT FILES · SQP DATA</div>
@@ -83,7 +81,7 @@ export default function ProjectDetail({ project, onBack }) {
                 onClick={() => setView("dashboard")}
                 style={{
                   display: "flex", alignItems: "center", gap: 7,
-                  background: C.imp, color: "#000", border: "none", borderRadius: 9,
+                  background: C.imp, color: C.btnText, border: "none", borderRadius: 9,
                   padding: "9px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer",
                   fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
                 }}
@@ -109,12 +107,12 @@ export default function ProjectDetail({ project, onBack }) {
               border: "2px dashed " + (drag ? C.imp : C.border),
               borderRadius: 16, padding: "40px 32px", textAlign: "center",
               cursor: "pointer", transition: "all 0.18s",
-              background: drag ? "#22d3ee07" : C.card, marginBottom: 24,
+              background: drag ? C.hoverBg : C.card, marginBottom: 24,
             }}
           >
             <input ref={inputRef} type="file" accept=".csv" multiple style={{ display: "none" }}
               onChange={e => { handleDrop([...e.target.files]); e.target.value = ""; }} />
-            <div style={{ width: 48, height: 48, borderRadius: 12, background: "#22d3ee12", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px" }}>
+            <div style={{ width: 48, height: 48, borderRadius: 12, background: C.imp + "14", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px" }}>
               <Upload size={22} style={{ color: C.imp }} />
             </div>
             <div style={{ fontSize: 16, fontWeight: 800, color: C.text, fontFamily: "'Syne', sans-serif", marginBottom: 6 }}>
@@ -191,7 +189,7 @@ export default function ProjectDetail({ project, onBack }) {
                 onClick={() => setView("dashboard")}
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
-                  background: C.imp, color: "#000", border: "none", borderRadius: 10,
+                  background: C.imp, color: C.btnText, border: "none", borderRadius: 10,
                   padding: "12px 28px", fontSize: 14, fontWeight: 700, cursor: "pointer",
                   fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
                 }}

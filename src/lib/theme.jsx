@@ -1,13 +1,13 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 const DARK = {
-  bg:      "#080b12",
-  surface: "#0e1118",
-  card:    "#131720",
-  card2:   "#181d28",
-  border:  "#1d2438",
-  border2: "#242d42",
-  imp:     "#22d3ee",
+  bg:      "#0a0a0a",
+  surface: "#111111",
+  card:    "#161616",
+  card2:   "#1a1a1a",
+  border:  "#222222",
+  border2: "#2a2a2a",
+  imp:     "#dc2626",
   clk:     "#a78bfa",
   pur:     "#fb923c",
   vol:     "#34d399",
@@ -15,21 +15,21 @@ const DARK = {
   red:     "#f87171",
   muted:   "#374151",
   text:    "#e2e8f0",
-  textDim: "#64748b",
-  textSub: "#94a3b8",
-  btnText: "#000",
+  textDim: "#71717a",
+  textSub: "#a1a1aa",
+  btnText: "#fff",
   rowAlt:  "#ffffff03",
-  hoverBg: "#22d3ee07",
+  hoverBg: "#dc262607",
 };
 
 const LIGHT = {
-  bg:      "#f4f5f7",
-  surface: "#ffffff",
-  card:    "#ffffff",
-  card2:   "#f8f9fb",
-  border:  "#e2e5ea",
-  border2: "#d1d5db",
-  imp:     "#0891b2",
+  bg:      "#f5f0e8",
+  surface: "#faf6ef",
+  card:    "#faf6ef",
+  card2:   "#f0ebe3",
+  border:  "#e0d6c8",
+  border2: "#d1c7b8",
+  imp:     "#b91c1c",
   clk:     "#7c3aed",
   pur:     "#ea580c",
   vol:     "#059669",
@@ -41,7 +41,7 @@ const LIGHT = {
   textSub: "#475569",
   btnText: "#fff",
   rowAlt:  "#00000003",
-  hoverBg: "#0891b207",
+  hoverBg: "#b91c1c07",
 };
 
 const ThemeCtx = createContext();
