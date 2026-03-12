@@ -53,8 +53,8 @@ export default function ProjectDetail({ project, onBack }) {
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet" />
-      <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "'DM Mono', monospace", fontSize: 13 }}>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+      <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "'Inter', sans-serif", fontSize: 13 }}>
 
         {/* Header */}
         <div style={{ background: C.surface, borderBottom: "1px solid " + C.border, padding: "14px 26px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -69,7 +69,7 @@ export default function ProjectDetail({ project, onBack }) {
             </div>
             <img src={mode === "dark" ? "/ecommercesteem_logo.png" : "/ecommercesteem_logo_dark.png"} alt="EcommerceSteem" style={{ height: 40, width: "auto" }} />
             <div style={{ borderLeft: "1px solid " + C.border, paddingLeft: 14 }}>
-              <div style={{ fontSize: 15, fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: -0.5 }}>
+              <div style={{ fontSize: 15, fontWeight: 800, fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: -0.5 }}>
                 {project.name}
               </div>
               <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>PROJECT FILES · SQP DATA</div>
@@ -83,7 +83,7 @@ export default function ProjectDetail({ project, onBack }) {
                   display: "flex", alignItems: "center", gap: 7,
                   background: C.imp, color: C.btnText, border: "none", borderRadius: 9,
                   padding: "9px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer",
-                  fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "opacity 0.15s",
                 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
                 onMouseLeave={e => e.currentTarget.style.opacity = "1"}
@@ -115,7 +115,7 @@ export default function ProjectDetail({ project, onBack }) {
             <div style={{ width: 48, height: 48, borderRadius: 12, background: C.imp + "14", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px" }}>
               <Upload size={22} style={{ color: C.imp }} />
             </div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: C.text, fontFamily: "'Syne', sans-serif", marginBottom: 6 }}>
+            <div style={{ fontSize: 16, fontWeight: 800, color: C.text, fontFamily: "'Plus Jakarta Sans', sans-serif", marginBottom: 6 }}>
               Drop SQP CSV files here
             </div>
             <div style={{ color: C.textDim, fontSize: 11 }}>
@@ -191,7 +191,7 @@ export default function ProjectDetail({ project, onBack }) {
                   display: "inline-flex", alignItems: "center", gap: 8,
                   background: C.imp, color: C.btnText, border: "none", borderRadius: 10,
                   padding: "12px 28px", fontSize: 14, fontWeight: 700, cursor: "pointer",
-                  fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "opacity 0.15s",
                 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
                 onMouseLeave={e => e.currentTarget.style.opacity = "1"}

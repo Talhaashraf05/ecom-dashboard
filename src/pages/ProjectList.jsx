@@ -39,8 +39,8 @@ export default function ProjectList({ onSelect }) {
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet" />
-      <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "'DM Mono', monospace", fontSize: 13 }}>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+      <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "'Inter', sans-serif", fontSize: 13 }}>
 
         {/* Header */}
         <div style={{ background: C.surface, borderBottom: "1px solid " + C.border, padding: "14px 26px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -56,7 +56,7 @@ export default function ProjectList({ onSelect }) {
           {/* Title row */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
             <div>
-              <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Syne', sans-serif" }}>Projects</div>
+              <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Projects</div>
               <div style={{ fontSize: 11, color: C.textDim, marginTop: 4 }}>Select a project to view its SQP dashboard</div>
             </div>
             <button
@@ -65,7 +65,7 @@ export default function ProjectList({ onSelect }) {
                 display: "flex", alignItems: "center", gap: 7,
                 background: C.imp, color: C.btnText, border: "none", borderRadius: 9,
                 padding: "9px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer",
-                fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
+                fontFamily: "'Plus Jakarta Sans', sans-serif", transition: "opacity 0.15s",
               }}
               onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
               onMouseLeave={e => e.currentTarget.style.opacity = "1"}
@@ -90,7 +90,7 @@ export default function ProjectList({ onSelect }) {
                 style={{
                   flex: 1, background: C.surface, border: "1px solid " + C.border,
                   borderRadius: 8, padding: "8px 14px", color: C.text, fontSize: 13,
-                  outline: "none", fontFamily: "'DM Mono', monospace",
+                  outline: "none", fontFamily: "'Inter', sans-serif",
                 }}
               />
               <button
@@ -98,7 +98,7 @@ export default function ProjectList({ onSelect }) {
                 style={{
                   background: C.imp, color: C.btnText, border: "none", borderRadius: 8,
                   padding: "8px 20px", fontSize: 12, fontWeight: 700, cursor: "pointer",
-                  fontFamily: "'Syne', sans-serif",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
                 }}
               >Create</button>
               <button
@@ -118,7 +118,7 @@ export default function ProjectList({ onSelect }) {
               background: C.card, borderRadius: 16, border: "1px solid " + C.border,
             }}>
               <FolderOpen size={40} style={{ color: C.muted, marginBottom: 16 }} />
-              <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "'Syne', sans-serif", marginBottom: 8 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "'Plus Jakarta Sans', sans-serif", marginBottom: 8 }}>
                 No projects yet
               </div>
               <div style={{ color: C.textDim, fontSize: 12 }}>
@@ -141,7 +141,7 @@ export default function ProjectList({ onSelect }) {
                 >
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
                     <div>
-                      <div style={{ fontSize: 15, fontWeight: 700, fontFamily: "'Syne', sans-serif", marginBottom: 6 }}>
+                      <div style={{ fontSize: 15, fontWeight: 700, fontFamily: "'Plus Jakarta Sans', sans-serif", marginBottom: 6 }}>
                         {p.name}
                       </div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 10, color: C.textDim }}>

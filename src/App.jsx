@@ -15,7 +15,7 @@ function AppInner() {
 
   if (!ready) {
     return (
-      <div style={{ background: C.bg, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: C.textDim, fontFamily: "'DM Mono', monospace", fontSize: 13 }}>
+      <div style={{ background: C.bg, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: C.textDim, fontFamily: "'Inter', sans-serif", fontSize: 13 }}>
         Loading...
       </div>
     );

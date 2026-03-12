@@ -126,7 +126,7 @@ function Badge({ value, unit, small }) {
     ? abs.toFixed(1) + "pp"
     : abs >= 1000 ? fmtN(Math.round(abs)) : abs.toFixed(0);
   return (
-    <span style={{ color: col, fontSize: small ? 10 : 11, display: "inline-flex", alignItems: "center", gap: 1, fontFamily: "monospace" }}>
+    <span style={{ color: col, fontSize: small ? 10 : 11, display: "inline-flex", alignItems: "center", gap: 1, fontFamily: "'JetBrains Mono', monospace" }}>
       <Icon size={small ? 10 : 11} />
       {up ? "+" : dn ? "-" : ""}{disp}
     </span>
@@ -149,7 +149,7 @@ function KpiCard({ kpi, trendData, latestVal, prevVal }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <div>
           <div style={{ fontSize: 10, color: C.textDim, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 8 }}>{kpi.label}</div>
-          <div style={{ fontSize: 30, fontWeight: 800, color: C.text, fontFamily: "'Syne', sans-serif", lineHeight: 1 }}>
+          <div style={{ fontSize: 30, fontWeight: 800, color: C.text, fontFamily: "'Plus Jakarta Sans', sans-serif", lineHeight: 1 }}>
             {latestVal !== null ? display : "–"}
           </div>
           <div style={{ marginTop: 7, display: "flex", alignItems: "center", gap: 6 }}>
@@ -316,7 +316,7 @@ function KpiCell({ value, prevValue, sparkData, color, unit, display, showBar })
   return (
     <div style={{ padding: "8px 14px", borderLeft: "1px solid " + C.border + "18", display: "flex", flexDirection: "column", gap: 3 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-        <span style={{ color, fontSize: 13, fontWeight: 600, fontFamily: "monospace" }}>{display}</span>
+        <span style={{ color, fontSize: 13, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{display}</span>
         <Badge value={d} unit={unit} small />
       </div>
       {showBar && (
@@ -428,7 +428,7 @@ function UploadZone({ onFiles, compact }) {
       <div style={{ width: 56, height: 56, borderRadius: 14, background: C.imp + "14", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
         <Upload size={26} style={{ color: C.imp }} />
       </div>
-      <div style={{ fontSize: 20, fontWeight: 800, color: C.text, fontFamily: "'Syne', sans-serif", marginBottom: 8 }}>Drop SQP reports here</div>
+      <div style={{ fontSize: 20, fontWeight: 800, color: C.text, fontFamily: "'Plus Jakarta Sans', sans-serif", marginBottom: 8 }}>Drop SQP reports here</div>
       <div style={{ color: C.textDim, fontSize: 13, marginBottom: 6 }}>Upload up to 12 weekly Brand-level SQP CSV files</div>
       <div style={{ color: C.muted, fontSize: 11 }}>GB_Search_query_performance_Brand_view_Simple_Week_*.csv</div>
     </div>
@@ -525,8 +525,8 @@ export default function SQPDashboard({ csvTexts = [], onAddFiles, onBack, projec
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet" />
-      <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "'DM Mono', monospace", fontSize: 13 }}>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+      <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: "'Inter', sans-serif", fontSize: 13 }}>
 
         {/* Header */}
         <div style={{ background: C.surface, borderBottom: "1px solid " + C.border, padding: "14px 26px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
@@ -543,7 +543,7 @@ export default function SQPDashboard({ csvTexts = [], onAddFiles, onBack, projec
             )}
             <img src={mode === "dark" ? "/ecommercesteem_logo.png" : "/ecommercesteem_logo_dark.png"} alt="EcommerceSteem" style={{ height: 40, width: "auto" }} />
             <div style={{ borderLeft: "1px solid " + C.border, paddingLeft: 14 }}>
-              <div style={{ fontSize: 15, fontWeight: 800, fontFamily: "'Syne', sans-serif", letterSpacing: -0.5 }}>
+              <div style={{ fontSize: 15, fontWeight: 800, fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: -0.5 }}>
                 {projectName || "Dashboard"}
               </div>
               <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>SQP DASHBOARD · BRAND VIEW</div>
