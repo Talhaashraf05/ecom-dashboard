@@ -455,6 +455,7 @@ function UploadZone({ onFiles, compact }) {
 /* ─── Main App ───────────────────────────────────────────────────── */
 export default function App() {
   const [allWeeks, setAllWeeks]     = useState([]);
+  const [selectedWeekIdx, setSelectedWeekIdx] = useState(-1);
   const [expandedKw, setExpandedKw] = useState(null);
   const [search, setSearch]         = useState("");
   const [sortKpi, setSortKpi]       = useState("imp");
@@ -471,13 +472,16 @@ export default function App() {
       }
       // CRITICAL: sort by real calendar date, not week number
       // Week 50/2025 (sortKey ≈ Dec 2025) must come before Week 1/2026 (sortKey ≈ Jan 2026)
-      return combined.sort((a, b) => a.sortKey - b.sortKey).slice(-12);
+      const sorted = combined.sort((a, b) => a.sortKey - b.sortKey).slice(-12);
+      setSelectedWeekIdx(sorted.length - 1);
+      return sorted;
     });
     setPage(0);
   }, []);
 
-  const latestWeek = allWeeks[allWeeks.length - 1];
-  const prevWeek   = allWeeks[allWeeks.length - 2];
+  const activeIdx  = selectedWeekIdx >= 0 && selectedWeekIdx < allWeeks.length ? selectedWeekIdx : allWeeks.length - 1;
+  const latestWeek = allWeeks[activeIdx];
+  const prevWeek   = activeIdx > 0 ? allWeeks[activeIdx - 1] : undefined;
 
   /* Aggregate KPI totals per week for top cards — in sorted order */
   const trendData = useMemo(() => allWeeks.map(w => {
@@ -495,8 +499,8 @@ export default function App() {
     };
   }), [allWeeks]);
 
-  const latest = trendData[trendData.length - 1];
-  const prevTd = trendData[trendData.length - 2];
+  const latest = trendData[activeIdx];
+  const prevTd = activeIdx > 0 ? trendData[activeIdx - 1] : undefined;
 
   /* Per-keyword multi-week history — in same chronological order as allWeeks */
   const kwHistoryMap = useMemo(() => {
@@ -557,11 +561,13 @@ export default function App() {
               <div
                 key={w.weekLabel}
                 title={w.weekLabel + " · " + w.weekDate}
+                onClick={() => { setSelectedWeekIdx(i); setExpandedKw(null); setPage(0); }}
                 style={{
                   padding: "3px 9px", borderRadius: 5, fontSize: 10,
-                  background: i === allWeeks.length - 1 ? C.imp + "20" : "none",
-                  border: "1px solid " + (i === allWeeks.length - 1 ? C.imp : C.border),
-                  color: i === allWeeks.length - 1 ? C.imp : C.textDim,
+                  cursor: "pointer", transition: "all 0.15s",
+                  background: i === activeIdx ? C.imp + "20" : "none",
+                  border: "1px solid " + (i === activeIdx ? C.imp : C.border),
+                  color: i === activeIdx ? C.imp : C.textDim,
                 }}
               >
                 {/* Show year only when it changes */}
@@ -601,6 +607,7 @@ export default function App() {
                   <div style={{ fontSize: 10, color: C.textDim, letterSpacing: 1.5, textTransform: "uppercase" }}>
                     Keywords &nbsp;
                     <span style={{ color: C.textSub }}>{latestWeek ? (latestWeek.weekShort || latestWeek.weekLabel) : ""}</span>
+                    {allWeeks.length > 1 && <span style={{ color: C.muted }}>&nbsp;({activeIdx + 1}/{allWeeks.length})</span>}
                     &nbsp;·&nbsp;<span style={{ color: C.imp }}>{filtered.length}</span> terms
                     &nbsp;·&nbsp;<span style={{ color: C.muted }}>click row to expand WoW</span>
                   </div>
