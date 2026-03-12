@@ -77,22 +77,24 @@ export default function ProjectDetail({ project, onBack }) {
               <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>PROJECT FILES · SQP DATA</div>
             </div>
           </div>
-          {files.length > 0 && (
-            <button
-              onClick={() => setView("dashboard")}
-              style={{
-                display: "flex", alignItems: "center", gap: 7,
-                background: C.imp, color: "#000", border: "none", borderRadius: 9,
-                padding: "9px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer",
-                fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
-              }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
-              onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-            >
-              <Eye size={15} /> View Dashboard
-            </button>
-          )}
-          <ThemeToggle />
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {files.length > 0 && (
+              <button
+                onClick={() => setView("dashboard")}
+                style={{
+                  display: "flex", alignItems: "center", gap: 7,
+                  background: C.imp, color: "#000", border: "none", borderRadius: 9,
+                  padding: "9px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer",
+                  fontFamily: "'Syne', sans-serif", transition: "opacity 0.15s",
+                }}
+                onMouseEnter={e => e.currentTarget.style.opacity = "0.85"}
+                onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+              >
+                <Eye size={15} /> View Dashboard
+              </button>
+            )}
+            <ThemeToggle />
+          </div>
         </div>
 
         <div style={{ padding: "32px 26px", maxWidth: 900, margin: "0 auto" }}>
