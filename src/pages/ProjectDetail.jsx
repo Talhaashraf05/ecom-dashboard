@@ -2,15 +2,11 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowLeft, Upload, Trash2, FileText, Eye, Layers } from "lucide-react";
 import { getFiles, addFiles, deleteFile } from "../lib/db";
 import SQPDashboard from "../components/SQPDashboard";
-
-const C = {
-  bg: "#080b12", surface: "#0e1118", card: "#131720", card2: "#181d28",
-  border: "#1d2438", border2: "#242d42", imp: "#22d3ee", text: "#e2e8f0",
-  textDim: "#64748b", textSub: "#94a3b8", muted: "#374151", green: "#10b981",
-  red: "#f87171", vol: "#34d399",
-};
+import { useTheme } from "../lib/theme";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function ProjectDetail({ project, onBack }) {
+  const { C } = useTheme();
   const [files, setFiles] = useState([]);
   const [view, setView] = useState("files"); // "files" | "dashboard"
   const [drag, setDrag] = useState(false);
@@ -96,6 +92,7 @@ export default function ProjectDetail({ project, onBack }) {
               <Eye size={15} /> View Dashboard
             </button>
           )}
+          <ThemeToggle />
         </div>
 
         <div style={{ padding: "32px 26px", maxWidth: 900, margin: "0 auto" }}>

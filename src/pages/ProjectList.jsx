@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { Plus, FolderOpen, Trash2, Layers } from "lucide-react";
-import { getProjects, createProject, deleteProject } from "../lib/db";
-
-const C = {
-  bg: "#080b12", surface: "#0e1118", card: "#131720", card2: "#181d28",
-  border: "#1d2438", border2: "#242d42", imp: "#22d3ee", text: "#e2e8f0",
-  textDim: "#64748b", textSub: "#94a3b8", muted: "#374151", red: "#f87171",
-};
+import { Plus, FolderOpen, Trash2, Layers, FileText } from "lucide-react";
+import { getProjects, createProject, deleteProject, getFileCountsByProject } from "../lib/db";
+import { useTheme } from "../lib/theme";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function ProjectList({ onSelect }) {
+  const { C } = useTheme();
   const [projects, setProjects] = useState([]);
+  const [fileCounts, setFileCounts] = useState({});
   const [showNew, setShowNew] = useState(false);
   const [newName, setNewName] = useState("");
   const inputRef = useRef();
@@ -18,8 +16,9 @@ export default function ProjectList({ onSelect }) {
   useEffect(() => { if (showNew && inputRef.current) inputRef.current.focus(); }, [showNew]);
 
   async function loadProjects() {
-    const list = await getProjects();
+    const [list, counts] = await Promise.all([getProjects(), getFileCountsByProject()]);
     setProjects(list.sort((a, b) => b.createdAt - a.createdAt));
+    setFileCounts(counts);
   }
 
   async function handleCreate() {
@@ -56,6 +55,7 @@ export default function ProjectList({ onSelect }) {
               <div style={{ fontSize: 9, color: C.textDim, letterSpacing: 1.5 }}>SEARCH QUERY PERFORMANCE · BRAND VIEW</div>
             </div>
           </div>
+          <ThemeToggle />
         </div>
 
         <div style={{ padding: "32px 26px", maxWidth: 900, margin: "0 auto" }}>
@@ -93,7 +93,7 @@ export default function ProjectList({ onSelect }) {
                 value={newName}
                 onChange={e => setNewName(e.target.value)}
                 onKeyDown={e => { if (e.key === "Enter") handleCreate(); if (e.key === "Escape") setShowNew(false); }}
-                placeholder="Project name (e.g. Infinity, AbLabs...)"
+                placeholder="Project name (e.g. Nfinity, AbLabs...)"
                 style={{
                   flex: 1, background: C.surface, border: "1px solid " + C.border,
                   borderRadius: 8, padding: "8px 14px", color: C.text, fontSize: 13,
@@ -151,8 +151,17 @@ export default function ProjectList({ onSelect }) {
                       <div style={{ fontSize: 15, fontWeight: 700, fontFamily: "'Syne', sans-serif", marginBottom: 6 }}>
                         {p.name}
                       </div>
-                      <div style={{ fontSize: 10, color: C.textDim }}>
-                        Created {new Date(p.createdAt).toLocaleDateString()}
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 10, color: C.textDim }}>
+                        <span>Created {new Date(p.createdAt).toLocaleDateString()}</span>
+                        {fileCounts[p.id] > 0 && (
+                          <span style={{
+                            display: "inline-flex", alignItems: "center", gap: 3,
+                            background: C.imp + "18", color: C.imp,
+                            padding: "2px 7px", borderRadius: 5, fontWeight: 600,
+                          }}>
+                            <FileText size={10} /> {fileCounts[p.id]} file{fileCounts[p.id] !== 1 ? "s" : ""}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div

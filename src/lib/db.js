@@ -111,3 +111,13 @@ export async function deleteFile(fileId) {
   const db = await open();
   await req(tx(db, ["files"], "readwrite").delete(fileId));
 }
+
+export async function getFileCountsByProject() {
+  const db = await open();
+  const all = await req(tx(db, ["files"]).getAll());
+  const counts = {};
+  for (const f of all) {
+    counts[f.projectId] = (counts[f.projectId] || 0) + 1;
+  }
+  return counts;
+}

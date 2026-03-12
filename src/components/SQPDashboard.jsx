@@ -7,32 +7,17 @@ import {
   Upload, X, ChevronUp, ChevronDown, Search, Eye,
   MousePointer, ShoppingCart, BarChart2, Minus, ChevronRight, Layers, ArrowLeft
 } from "lucide-react";
+import { useTheme } from "../lib/theme";
+import ThemeToggle from "./ThemeToggle";
 
-/* ─── Theme ─────────────────────────────────────────────────────── */
-const C = {
-  bg:      "#080b12",
-  surface: "#0e1118",
-  card:    "#131720",
-  card2:   "#181d28",
-  border:  "#1d2438",
-  border2: "#242d42",
-  imp:     "#22d3ee",
-  clk:     "#a78bfa",
-  pur:     "#fb923c",
-  vol:     "#34d399",
-  green:   "#10b981",
-  red:     "#f87171",
-  muted:   "#374151",
-  text:    "#e2e8f0",
-  textDim: "#64748b",
-  textSub: "#94a3b8",
-};
+/* ─── Theme (mutable – set from context each render) ────────────── */
+let C = {};
 
 const KPI_DEFS = [
-  { id: "imp", label: "Impression Share", field: "Impressions: Brand Share %",  countField: "Impressions: Brand Count", totalField: "Impressions: Total Count", color: C.imp, icon: Eye,          unit: "%" },
-  { id: "clk", label: "Click Share",      field: "Clicks: Brand Share %",       countField: "Clicks: Brand Count",      totalField: "Clicks: Total Count",      color: C.clk, icon: MousePointer, unit: "%" },
-  { id: "pur", label: "Purchase Share",   field: "Purchases: Brand Share %",    countField: "Purchases: Brand Count",   totalField: "Purchases: Total Count",   color: C.pur, icon: ShoppingCart, unit: "%" },
-  { id: "vol", label: "Search Volume",    field: "Search Query Volume",         countField: "Search Query Volume",      totalField: null,                       color: C.vol, icon: BarChart2,    unit: ""  },
+  { id: "imp", label: "Impression Share", field: "Impressions: Brand Share %",  countField: "Impressions: Brand Count", totalField: "Impressions: Total Count", colorKey: "imp", icon: Eye,          unit: "%" },
+  { id: "clk", label: "Click Share",      field: "Clicks: Brand Share %",       countField: "Clicks: Brand Count",      totalField: "Clicks: Total Count",      colorKey: "clk", icon: MousePointer, unit: "%" },
+  { id: "pur", label: "Purchase Share",   field: "Purchases: Brand Share %",    countField: "Purchases: Brand Count",   totalField: "Purchases: Total Count",   colorKey: "pur", icon: ShoppingCart, unit: "%" },
+  { id: "vol", label: "Search Volume",    field: "Search Query Volume",         countField: "Search Query Volume",      totalField: null,                       colorKey: "vol", icon: BarChart2,    unit: ""  },
 ];
 
 /* ─── CSV Parser ─────────────────────────────────────────────────── */
@@ -160,7 +145,7 @@ function KpiCard({ kpi, trendData, latestVal, prevVal }) {
       padding: "18px 20px", display: "flex", flexDirection: "column", gap: 14,
       position: "relative", overflow: "hidden",
     }}>
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: kpi.color, opacity: 0.75, borderRadius: "14px 14px 0 0" }} />
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: C[kpi.colorKey], opacity: 0.75, borderRadius: "14px 14px 0 0" }} />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <div>
           <div style={{ fontSize: 10, color: C.textDim, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 8 }}>{kpi.label}</div>
@@ -172,12 +157,12 @@ function KpiCard({ kpi, trendData, latestVal, prevVal }) {
             {prevVal !== null && <span style={{ color: C.textDim, fontSize: 10 }}>WoW</span>}
           </div>
         </div>
-        <div style={{ background: kpi.color + "18", borderRadius: 10, padding: 10 }}>
-          <Icon size={20} style={{ color: kpi.color }} />
+        <div style={{ background: C[kpi.colorKey] + "18", borderRadius: 10, padding: 10 }}>
+          <Icon size={20} style={{ color: C[kpi.colorKey] }} />
         </div>
       </div>
       <div style={{ display: "flex", alignItems: "flex-end", gap: 10 }}>
-        <Spark data={sparkVals} color={kpi.color} width={130} height={40} />
+        <Spark data={sparkVals} color={C[kpi.colorKey]} width={130} height={40} />
         <div style={{ fontSize: 10, color: C.textDim, paddingBottom: 4 }}>{trendData.length}w trend</div>
       </div>
     </div>
@@ -452,6 +437,7 @@ function UploadZone({ onFiles, compact }) {
 
 /* ─── Main Dashboard ─────────────────────────────────────────────── */
 export default function SQPDashboard({ csvTexts = [], onAddFiles, onBack, projectName }) {
+  C = useTheme().C;
   const [allWeeks, setAllWeeks]     = useState([]);
   const [selectedWeekIdx, setSelectedWeekIdx] = useState(-1);
   const [expandedKw, setExpandedKw] = useState(null);
@@ -584,6 +570,7 @@ export default function SQPDashboard({ csvTexts = [], onAddFiles, onBack, projec
               </div>
             ))}
             {allWeeks.length > 0 && <UploadZone onFiles={handleFiles} compact />}
+            <ThemeToggle />
           </div>
         </div>
 
@@ -642,7 +629,7 @@ export default function SQPDashboard({ csvTexts = [], onAddFiles, onBack, projec
                         style={{
                           padding: "9px 14px", display: "flex", alignItems: "center", gap: 5,
                           cursor: "pointer", userSelect: "none",
-                          color: active ? kpi.color : C.textDim,
+                          color: active ? C[kpi.colorKey] : C.textDim,
                           fontSize: 10, textTransform: "uppercase", letterSpacing: 1.2,
                           borderLeft: "1px solid " + C.border,
                           transition: "color 0.12s",

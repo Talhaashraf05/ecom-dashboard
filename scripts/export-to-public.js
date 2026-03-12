@@ -7,7 +7,7 @@
  *   node scripts/export-to-public.js <project-slug> <project-name> <csv-folder>
  *
  * Example:
- *   node scripts/export-to-public.js infinity "Infinity" ./my-csvs/
+ *   node scripts/export-to-public.js nfinity "Nfinity" ./my-csvs/
  *
  * This copies all .csv files from <csv-folder> into public/data/<project-slug>/
  * and updates public/data/manifest.json automatically.
@@ -19,7 +19,7 @@ import { join, basename, resolve } from "path";
 const args = process.argv.slice(2);
 if (args.length < 3) {
   console.log("Usage: node scripts/export-to-public.js <project-slug> <project-name> <csv-folder>");
-  console.log('Example: node scripts/export-to-public.js infinity "Infinity" ./my-csvs/');
+  console.log('Example: node scripts/export-to-public.js nfinity "Nfinity" ./my-csvs/');
   process.exit(1);
 }
 
